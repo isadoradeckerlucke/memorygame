@@ -59,6 +59,7 @@ function createDivsForColors(colorArray) {
 
 let first;
 let second;
+let tries = 0;
 let noClick = false; //this removes the ability to click too fast on more than two cards. no clicks allowed when two cards are already turned over. 
 function handleCardClick(event) {
   if (noClick) return; //end the function early if noClick is set to true
@@ -89,6 +90,7 @@ function handleCardClick(event) {
     first = null;
     second = null;
     noClick = false; //reset, allow clicks again
+    tries ++;
   } else if (second && first.className !== second.className){ //if second is defined and first doesn't equal second
     first.removeAttribute('data-flipped');
     second.removeAttribute('data-flipped');
@@ -100,7 +102,9 @@ function handleCardClick(event) {
       second = null;
       noClick = false; //reset and allow clicks again
     }, 1000)
+    tries ++;
   }
+  document.getElementById('count').innerHTML = tries;
 
 }
 
